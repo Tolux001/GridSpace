@@ -163,8 +163,8 @@ export default function Home() {
 							Get access to productive workspaces in just three simple steps
 						</p>
 					</div>
-					<div className="flex flex-col md:flex-row items-center justify-between gap-6 md:gap-2">
-						<div className="bg-white px-4 pt-20 pb-12 flex flex-col items-center text-center relative">
+					<div className="flex flex-col md:flex-row items-center justify-between gap-6">
+						<div className="bg-white px-4 md:px-8 pt-20 pb-12 flex flex-col items-center text-center relative">
 							<div className="bg-[#002F5B] p-2 md:p-4 rounded-full absolute top-[-20px]">
 								<Search className="text-white" />
 							</div>
@@ -211,13 +211,13 @@ export default function Home() {
 				<section className="min-h-[80vh] px-4 md:px-12 py-16">
 					<WhyChooseGridSpace />
 				</section>
-				<section className="bg-[#F25417] px-4 md:px-12 py-16">
+				<section className="bg-[#FFC3AC] px-4 md:px-12 py-16">
 					<Testimonials />
 				</section>
-				<section className="bg-amber-50 min-h-[70vh] px-4 md:px-12 py-2">
+				<section className="bg-[#FFF3EE] px-4 md:px-12 pt-16 pb-8">
 					<CallToAction />
 				</section>
-				<section className="px-4 md:px-12 py-8">
+				<section className="px-4 md:px-12 py-8 relative z-2">
 					<Subscribe />
 				</section>
 			</main>
@@ -305,6 +305,7 @@ function WhyChooseGridSpace() {
 
 // Testimonials
 type Testimonial = {
+	img: React.ReactNode;
 	name: string;
 	role: string;
 	message: string;
@@ -312,18 +313,45 @@ type Testimonial = {
 
 const testimonials: Testimonial[] = [
 	{
+		img: (
+			<Image
+				src="/person1.png?height=60&width=60"
+				alt="Location Icon"
+				width={60}
+				height={60}
+				className="object-cover rounded-full"
+			/>
+		),
 		name: "John Morgan",
 		role: "Marketing Consultant",
 		message:
 			"Gridspace saved my business trip! Found a perfect workspace with reliable internet in minutes. The booking process was seamless.",
 	},
 	{
+		img: (
+			<Image
+				src="/person2.png?height=60&width=60"
+				alt="Location Icon"
+				width={60}
+				height={60}
+				className="object-cover rounded-full"
+			/>
+		),
 		name: "Jessica Wright",
 		role: "Freelance Designer",
 		message:
 			"As a freelancer, I need flexible workspaces. Gridspace’s variety and quality are unmatched. Plus, the rates are very reasonable",
 	},
 	{
+		img: (
+			<Image
+				src="/person3.png?height=60&width=60"
+				alt="Location Icon"
+				width={60}
+				height={60}
+				className="object-cover rounded-full"
+			/>
+		),
 		name: "Derek Woods",
 		role: "Product Manager",
 		message:
@@ -334,10 +362,10 @@ const testimonials: Testimonial[] = [
 function Testimonials() {
 	return (
 		<div>
-			<h2 className="text-xl font-bold text-center text-orange-700 mb-2">
+			<h2 className="text-xl md:text-3xl font-bold text-center text-[#002F5B] mb-2">
 				What Our Users Say
 			</h2>
-			<p className="text-center text-gray-700 mb-8">
+			<p className="text-center text-[#121212] mb-4">
 				Join thousands of professionals who trust Gridspace for their workspace
 				needs
 			</p>
@@ -346,15 +374,15 @@ function Testimonials() {
 				{testimonials.map((t, i) => (
 					<div
 						key={i}
-						className="bg-white p-6 rounded shadow text-sm flex flex-col gap-2">
+						className="bg-white p-6 rounded-lg shadow text-sm flex flex-col gap-2">
 						<div className="flex items-center gap-3">
-							<div className="h-10 w-10 bg-gray-200 rounded-full" />
+							<div>{t.img}</div>
 							<div>
-								<p className="font-semibold">{t.name}</p>
-								<p className="text-gray-500 text-xs">{t.role}</p>
+								<p className="font-semibold text-black">{t.name}</p>
+								<p className="text-[#848383] text-xs">{t.role}</p>
 							</div>
 						</div>
-						<p className="text-gray-700 italic">“{t.message}”</p>
+						<p className="text-[#2E2E2E]">“{t.message}”</p>
 						<div className="text-orange-500 text-xs mt-auto">★★★★★</div>
 					</div>
 				))}
@@ -366,27 +394,29 @@ function Testimonials() {
 // CallToAction
 function CallToAction() {
 	return (
-		<div className="py-12 px-4 md:px-20 flex flex-col md:flex-row items-center justify-between gap-6">
+		<div className="flex flex-col md:flex-row items-center justify-between gap-6 relative">
 			<div>
-				<h2 className="text-xl font-bold mb-2 text-gray-900">
+				<h2 className="text-xl md:text-3xl font-bold mb-2 text-[#002F5B]">
 					Ready to Find Your Perfect Workspace?
 				</h2>
-				<p className="text-gray-700 mb-4">
+				<p className="text-gray-700 mb-5">
 					Join thousands of professionals who trust Gridspace for their
 					workspace needs
 				</p>
-				<button className="bg-orange-600 text-white px-4 py-2 rounded hover:bg-orange-700">
+				<button className="bg-[#F25417] text-white px-6 py-4 rounded-lg hover:bg-orange-700">
 					Start Searching
 				</button>
 			</div>
-			<div className="relative w-full md:w-1/2 h-64">
+			<div className="relative z-1">
 				<Image
 					src="/workspace.png"
 					alt="Workspace"
-					fill
-					className="object-cover rounded-md"
+					width={540}
+					height={400}
+					className="object-cover rounded-md max-w-[320px] max-h-[320px] lg:max-w-[540px] lg:max-h-[400px]"
 				/>
 			</div>
+			<div className="bg-[#002F5B] rounded-full w-70 h-70 absolute bottom-[-60px] right-[-40px] z-0"></div>
 		</div>
 	);
 }
@@ -395,20 +425,22 @@ function CallToAction() {
 function Subscribe() {
 	return (
 		<section className="text-center">
-			<h2 className="text-xl font-bold text-gray-900 mb-2">Join the Grid</h2>
+			<h2 className="text-xl md:text-3xl font-bold text-[#002F5B] mb-2">
+				Join the Grid
+			</h2>
 			<p className="text-gray-600 mb-6">
-				Get workspace tips, updates, and exclusive offers straight to your
-				inbox.
+				Get workspace tips, updates, and exclusive offers <br /> straight to
+				your inbox.
 			</p>
-			<form className="flex flex-col md:flex-row gap-3 justify-center items-center">
+			<form className="relative w-full max-w-2xl mx-auto">
 				<input
 					type="email"
 					placeholder="Enter your email"
-					className="px-4 py-2 border border-gray-300 rounded w-full md:w-80"
+					className="px-2 py-4 border-2 border-[#F25417] rounded-lg w-full md:w-2xl relative text-neutral-950 focus:outline-none focus:border-orange-500"
 				/>
 				<button
 					type="submit"
-					className="bg-orange-600 text-white px-4 py-2 rounded hover:bg-orange-700">
+					className="bg-[#F25417] text-white px-4 py-2 rounded hover:bg-orange-700 absolute right-2 top-1/2 transform -translate-y-1/2 cursor-pointer">
 					Subscribe Now
 				</button>
 			</form>
