@@ -53,7 +53,7 @@ export default function Home() {
 							</p>
 						</div>
 						<div className="flex justify-between items-center gap-2 mt-6 md:mt-12 bg-white shadow py-6 px-2 md:px-4 rounded-lg">
-							<span className="w-28 md:w-50 flex items-center border border-[rgb(0,47,91)] rounded-lg gap-2 px-3 py-2">
+							<span className="min-w-28 md:w-50 flex items-center border border-[rgb(0,47,91)] rounded-lg gap-2 px-3 py-2">
 								<LocationEdit className="text-gray-500" />
 
 								<input
@@ -62,7 +62,7 @@ export default function Home() {
 									className="w-full p-2 border-none hover:border-none focus:outline-none text-[#A3A3A3] text-[14px] leading-[100%]"
 								/>
 							</span>
-							<span className="w-28 md:w-50 flex items-center border border-[rgb(0,47,91)] rounded-lg gap-2 px-3 py-2">
+							<span className="min-w-28 md:w-50 flex items-center border border-[rgb(0,47,91)] rounded-lg gap-2 px-3 py-2">
 								<CalendarDays
 									className="text-gray-500 cursor-pointer"
 									onClick={() => setShowCalendar(!showCalendar)}
