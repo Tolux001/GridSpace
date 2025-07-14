@@ -242,6 +242,7 @@ const features = [
 				className="object-cover"
 			/>
 		),
+		color: "bg-[#D4FCE0]",
 	},
 	{
 		title: "Verified & Secure",
@@ -249,18 +250,21 @@ const features = [
 			"Every workspace is thoroughly vetted and verified to ensure quality, safety, and professionalism.",
 		icon: <ShieldCheck className="h-6 w-6 text-white" />,
 		active: true,
+		color: "bg-[#F25417]",
 	},
 	{
 		title: "Affordable Rates",
 		description:
 			"Get access to quality workspaces that suit your budget, whether you’re booking for a day or a month.",
 		icon: <Wallet className="h-6 w-6 text-[#A855F7]" />,
+		color: "bg-[#FAF5FF]",
 	},
 	{
 		title: "Flexible Booking",
 		description:
 			"Book by the hour, day, or month with easy cancellation and modification options.",
 		icon: <BookText className="h-6 w-6 text-sky-500" />,
+		color: "bg-[#D7F7FB]",
 	},
 ];
 
@@ -278,13 +282,19 @@ function WhyChooseGridSpace() {
 				{features.map((feature, idx) => (
 					<div
 						key={idx}
-						className={`flex items-start gap-4 p-5 md:p-10 rounded-lg shadow ${
-							feature.active ? "bg-blue-900 text-white" : "bg-white"
+						className={`flex flex-col items-center text-center gap-3 p-5 md:p-10 rounded-lg shadow ${
+							feature.active
+								? "bg-[#002F5B] text-white"
+								: "bg-white text-[#121212]"
 						}`}>
-						<div>{feature.icon}</div>
+						<div className={`${feature.color} p-2 md:p-4 rounded-full`}>
+							{feature.icon}
+						</div>
 						<div>
-							<h3 className={`font-semibold mb-1`}>{feature.title}</h3>
-							<p className="text-sm">{feature.description}</p>
+							<h3 className={`font-bold text-base md:text-2xl`}>
+								{feature.title}
+							</h3>
+							<p className="text-sm md:text-xl">{feature.description}</p>
 						</div>
 					</div>
 				))}
@@ -371,7 +381,7 @@ function CallToAction() {
 			</div>
 			<div className="relative w-full md:w-1/2 h-64">
 				<Image
-					src="/workspace.jpg"
+					src="/workspace.png"
 					alt="Workspace"
 					fill
 					className="object-cover rounded-md"
