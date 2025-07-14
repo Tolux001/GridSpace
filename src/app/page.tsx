@@ -1,103 +1,407 @@
+"use client";
+
+import Footer from "@/components/layouts/footer";
+import Navbar from "@/components/layouts/navbar";
+import {
+	ArrowRight,
+	CalendarDays,
+	CheckCircle2,
+	LocationEdit,
+	Search,
+	ShieldCheck,
+	Wallet,
+	BookText,
+} from "lucide-react";
 import Image from "next/image";
+import React, { useState } from "react";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+	const [startDate, setStartDate] = useState<Date | null>(null);
+	const [showCalendar, setShowCalendar] = useState(false);
+	const LightningIcon = () => (
+		<svg
+			width={24}
+			height={24}
+			viewBox="0 0 24 24"
+			fill="none"
+			stroke="currentColor"
+			strokeWidth={2}
+			strokeLinecap="round"
+			strokeLinejoin="round"
+			className="lucide lucide-zap text-white">
+			<polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+		</svg>
+	);
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
-  );
+	return (
+		<>
+			<Navbar />
+			<main>
+				<section className="min-h-screen flex flex-col lg:flex-row items-center justify-between gap-4 px-4 md:px-12 py-8">
+					<div>
+						<div>
+							<h1 className="text-3xl md:text-6xl font-bold text-[#002F5B]">
+								Find a flexible{" "}
+								<span className="text-[#F25417]">workspace</span> near you
+							</h1>
+							<p className="text-[#121212] text-[16px] leading-[20px] md:text-[20px] md:leading-[30px] mt-5">
+								Discover verified, flexible workspaces with reliable power,
+								high-speed internet, and everything you need to stay productive
+								on the go.
+							</p>
+						</div>
+						<div className="flex justify-between items-center gap-2 mt-6 md:mt-12 bg-white shadow py-6 px-2 md:px-4 rounded-lg">
+							<span className="w-28 md:w-50 flex items-center border border-[rgb(0,47,91)] rounded-lg gap-2 px-3 py-2">
+								<LocationEdit className="text-gray-500" />
+
+								<input
+									type="text"
+									placeholder="Enter location or city..."
+									className="w-full p-2 border-none hover:border-none focus:outline-none text-[#A3A3A3] text-[14px] leading-[100%]"
+								/>
+							</span>
+							<span className="w-28 md:w-50 flex items-center border border-[rgb(0,47,91)] rounded-lg gap-2 px-3 py-2">
+								<CalendarDays
+									className="text-gray-500 cursor-pointer"
+									onClick={() => setShowCalendar(!showCalendar)}
+								/>
+								{showCalendar && (
+									<div className="relative">
+										<DatePicker
+											selected={startDate}
+											onChange={(date: Date | null) => setStartDate(date)}
+											readOnly
+											onClickOutside={() => setShowCalendar(false)}
+											inline
+											className="absolute z-10"
+										/>
+									</div>
+								)}
+								<input
+									type="text"
+									placeholder="dd/mm/yy"
+									value={startDate ? startDate.toLocaleDateString() : ""}
+									className="w-full p-2 border-none hover:border-none focus:outline-none text-[#A3A3A3] text-[14px] leading-[100%]"
+								/>
+							</span>
+							<button className="bg-[#F25417] font-bold text-white p-2 md:px-3 md:py-4 rounded-lg hover:bg-orange-700 transition md:ml-8 cursor-pointer">
+								Find a Space
+								<ArrowRight className="inline-block ml-2" />
+							</button>
+						</div>
+						<div className="flex items-center justify-between gap-4 sm:gap-8 mt-6 md:mt-18">
+							<span className="flex items-center gap-2">
+								<Image
+									src="/User.svg?height=70&width=70"
+									alt="User Icon"
+									width={70}
+									height={70}
+									className="object-cover max-w-[35px] max-h-[35px] md:max-w-[70px] md:max-h-[70px]"
+								/>
+								<span>
+									<h2 className="text-[#002F5B] font-bold text-xl md:text-3xl">
+										50K+
+									</h2>
+									<p className="text-[#9B9B9B] text-xs md:text-base">
+										Active Users
+									</p>
+								</span>
+							</span>
+							<span className="flex items-center gap-2">
+								<Image
+									src="/location.svg?height=70&width=70"
+									alt="Location Icon"
+									width={70}
+									height={70}
+									className="object-cover max-w-[35px] max-h-[35px] md:max-w-[70px] md:max-h-[70px]"
+								/>
+								<span>
+									<h2 className="text-[#002F5B] font-bold text-xl md:text-3xl">
+										1200+
+									</h2>
+									<p className="text-[#9B9B9B] text-xs md:text-base">
+										Locations
+									</p>
+								</span>
+							</span>
+							<span className="flex items-center gap-2">
+								<Image
+									src="/rating.svg?height=70&width=70"
+									alt="Rating Icon"
+									width={70}
+									height={70}
+									className="object-cover max-w-[35px] max-h-[35px] md:max-w-[70px] md:max-h-[70px]"
+								/>
+								<span>
+									<h2 className="text-[#002F5B] font-bold text-xl md:text-3xl">
+										4.9/5
+									</h2>
+									<p className="text-[#9B9B9B] text-xs md:text-base">Rating</p>
+								</span>
+							</span>
+						</div>
+					</div>
+					<div className="relative">
+						<div className="bg-[#D6EBFF] w-30 h-30 z-0 absolute bottom-[-20px] left-[-10px]"></div>
+						<Image
+							src="/hero-section.png"
+							alt="Hero Image"
+							width={593}
+							height={611}
+							className="object-cover max-w-[320px] max-h-[386px] md:max-w-[593px] md:max-h-[611px] rounded-lg relative z-2"
+						/>
+					</div>
+				</section>
+				<section className="min-h-screen px-4 md:px-12 py-16">
+					<div className="flex flex-col items-center text-center">
+						<h1 className="text-[#002F5B] font-bold text-[20px] md:text-3xl">
+							How GridSpace Works
+						</h1>
+						<p className="text-[#121212] text-base md:text-xl my-4 mb-10">
+							Get access to productive workspaces in just three simple steps
+						</p>
+					</div>
+					<div className="flex flex-col md:flex-row items-center justify-between gap-6 md:gap-2">
+						<div className="bg-white px-4 pt-20 pb-12 flex flex-col items-center text-center relative">
+							<div className="bg-[#002F5B] p-2 md:p-4 rounded-full absolute top-[-20px]">
+								<Search className="text-white" />
+							</div>
+							<div className="text-[#121212]">
+								<h2 className="font-bold text-base md:text-2xl">
+									Search & Discover
+								</h2>
+								<p className="text-sm md:text-lg mt-4 max-w-[350px]">
+									Browse verified workspaces in your area with detailed photos,
+									amenities and real time availability
+								</p>
+							</div>
+						</div>
+						<div className="bg-white px-4 pt-20 pb-12 flex flex-col items-center text-center relative">
+							<div className="bg-[#F25417] p-2 md:p-4 rounded-full absolute top-[-20px]">
+								<CheckCircle2 className="text-white" />
+							</div>
+							<div className="text-[#121212]">
+								<h2 className="font-bold text-base md:text-2xl">
+									Book Instantly
+								</h2>
+								<p className="text-sm md:text-lg mt-4 max-w-[350px]">
+									Reserve your perfect workspace instantly with secure payment
+									and flexible booking options
+								</p>
+							</div>
+						</div>
+						<div className="bg-white px-4 pt-20 pb-12 flex flex-col items-center text-center relative">
+							<div className="bg-[#002F5B] p-2 md:p-4 rounded-full absolute top-[-20px]">
+								{LightningIcon()}
+							</div>
+							<div className="text-[#121212]">
+								<h2 className="font-bold text-base md:text-2xl">
+									Work Productively
+								</h2>
+								<p className="text-sm md:text-lg mt-4 max-w-[350px]">
+									Arrive and get productive immediately with reliable power,
+									fast WiFi and all essential amenities
+								</p>
+							</div>
+						</div>
+					</div>
+				</section>
+				<section className="min-h-[80vh] px-4 md:px-12 py-16">
+					<WhyChooseGridSpace />
+				</section>
+				<section className="bg-[#F25417] px-4 md:px-12 py-16">
+					<Testimonials />
+				</section>
+				<section className="bg-amber-50 min-h-[70vh] px-4 md:px-12 py-2">
+					<CallToAction />
+				</section>
+				<section className="px-4 md:px-12 py-8">
+					<Subscribe />
+				</section>
+			</main>
+			<Footer />
+		</>
+	);
+}
+
+// WhyChooseGridSpace
+
+const features = [
+	{
+		title: "Reliable Power & Internet",
+		description:
+			"Never worry about connectivity with guaranteed backup power and high-speed internet at every location.",
+		icon: (
+			<Image
+				src="/bulb.svg?height=30&width=30"
+				alt="Location Icon"
+				width={30}
+				height={30}
+				className="object-cover"
+			/>
+		),
+	},
+	{
+		title: "Verified & Secure",
+		description:
+			"Every workspace is thoroughly vetted and verified to ensure quality, safety, and professionalism.",
+		icon: <ShieldCheck className="h-6 w-6 text-white" />,
+		active: true,
+	},
+	{
+		title: "Affordable Rates",
+		description:
+			"Get access to quality workspaces that suit your budget, whether you’re booking for a day or a month.",
+		icon: <Wallet className="h-6 w-6 text-[#A855F7]" />,
+	},
+	{
+		title: "Flexible Booking",
+		description:
+			"Book by the hour, day, or month with easy cancellation and modification options.",
+		icon: <BookText className="h-6 w-6 text-sky-500" />,
+	},
+];
+
+function WhyChooseGridSpace() {
+	return (
+		<div>
+			<h2 className="text-xl md:text-3xl text-[#002F5B] font-bold text-center mb-2">
+				Why Choose <span className="text-orange-600">GridSpace</span>
+			</h2>
+			<p className="text-center text-base md:text-xl text-[#121212] mb-8">
+				Experience the difference with our commitment to quality and reliability
+			</p>
+
+			<div className="grid md:grid-cols-2 gap-4">
+				{features.map((feature, idx) => (
+					<div
+						key={idx}
+						className={`flex items-start gap-4 p-5 md:p-10 rounded-lg shadow ${
+							feature.active ? "bg-blue-900 text-white" : "bg-white"
+						}`}>
+						<div>{feature.icon}</div>
+						<div>
+							<h3 className={`font-semibold mb-1`}>{feature.title}</h3>
+							<p className="text-sm">{feature.description}</p>
+						</div>
+					</div>
+				))}
+			</div>
+		</div>
+	);
+}
+
+// Testimonials
+type Testimonial = {
+	name: string;
+	role: string;
+	message: string;
+};
+
+const testimonials: Testimonial[] = [
+	{
+		name: "John Morgan",
+		role: "Marketing Consultant",
+		message:
+			"Gridspace saved my business trip! Found a perfect workspace with reliable internet in minutes. The booking process was seamless.",
+	},
+	{
+		name: "Jessica Wright",
+		role: "Freelance Designer",
+		message:
+			"As a freelancer, I need flexible workspaces. Gridspace’s variety and quality are unmatched. Plus, the rates are very reasonable",
+	},
+	{
+		name: "Derek Woods",
+		role: "Product Manager",
+		message:
+			"The verification process gives me confidence. Every space I’ve booked has been exactly as described. Excellent platform",
+	},
+];
+
+function Testimonials() {
+	return (
+		<div>
+			<h2 className="text-xl font-bold text-center text-orange-700 mb-2">
+				What Our Users Say
+			</h2>
+			<p className="text-center text-gray-700 mb-8">
+				Join thousands of professionals who trust Gridspace for their workspace
+				needs
+			</p>
+
+			<div className="grid md:grid-cols-3 gap-6">
+				{testimonials.map((t, i) => (
+					<div
+						key={i}
+						className="bg-white p-6 rounded shadow text-sm flex flex-col gap-2">
+						<div className="flex items-center gap-3">
+							<div className="h-10 w-10 bg-gray-200 rounded-full" />
+							<div>
+								<p className="font-semibold">{t.name}</p>
+								<p className="text-gray-500 text-xs">{t.role}</p>
+							</div>
+						</div>
+						<p className="text-gray-700 italic">“{t.message}”</p>
+						<div className="text-orange-500 text-xs mt-auto">★★★★★</div>
+					</div>
+				))}
+			</div>
+		</div>
+	);
+}
+
+// CallToAction
+function CallToAction() {
+	return (
+		<div className="py-12 px-4 md:px-20 flex flex-col md:flex-row items-center justify-between gap-6">
+			<div>
+				<h2 className="text-xl font-bold mb-2 text-gray-900">
+					Ready to Find Your Perfect Workspace?
+				</h2>
+				<p className="text-gray-700 mb-4">
+					Join thousands of professionals who trust Gridspace for their
+					workspace needs
+				</p>
+				<button className="bg-orange-600 text-white px-4 py-2 rounded hover:bg-orange-700">
+					Start Searching
+				</button>
+			</div>
+			<div className="relative w-full md:w-1/2 h-64">
+				<Image
+					src="/workspace.jpg"
+					alt="Workspace"
+					fill
+					className="object-cover rounded-md"
+				/>
+			</div>
+		</div>
+	);
+}
+
+// Subscribe
+function Subscribe() {
+	return (
+		<section className="text-center">
+			<h2 className="text-xl font-bold text-gray-900 mb-2">Join the Grid</h2>
+			<p className="text-gray-600 mb-6">
+				Get workspace tips, updates, and exclusive offers straight to your
+				inbox.
+			</p>
+			<form className="flex flex-col md:flex-row gap-3 justify-center items-center">
+				<input
+					type="email"
+					placeholder="Enter your email"
+					className="px-4 py-2 border border-gray-300 rounded w-full md:w-80"
+				/>
+				<button
+					type="submit"
+					className="bg-orange-600 text-white px-4 py-2 rounded hover:bg-orange-700">
+					Subscribe Now
+				</button>
+			</form>
+		</section>
+	);
 }
